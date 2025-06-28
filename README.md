@@ -55,6 +55,8 @@ Assuming you are in gentoo docker (via i.e. `docker run -it gentoo/stage3:amd64-
 
 now presumably a binary executable at `./build/pedal-1.0`
 
+The executable needs access to a corresponding `/dev/input/event(for pedals)` and `/dev/uinput`. Maybe run under root.
+
 # License
 
 MIT
