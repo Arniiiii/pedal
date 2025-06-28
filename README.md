@@ -34,15 +34,25 @@ But, as you may think not all of the packages do exist on all main distros. Curr
 
 Assuming you are in gentoo docker (via i.e. `docker run -it gentoo/stage3:amd64-openrc /bin/bash` or if you are ready to compile a lot of packages for dependencies: `docker run -it gentoo/stage3:amd64-musl /bin/bash`), here's the commands I would expect to work (not tested, but should work):
 `emerge-webrsync`
+
 `getuto`
+
 `FEATURES="parallel-install parallel-fetch" emerge -vtg -j8 -l $(nproc) eselect-repository`
+
 `eselect repository enable ex_repo`
+
 `emaint sync --repo ex_repo`
+
 `echo -e "dev-cpp/corral ~amd64\ndev-cpp/quill ~amd64\ndev-cmake/packageproject-cmake ~amd64\ndev-cmake/cpm-cmake ~amd64\ndev-cmake/addboost-cmake ~amd64" > /etc/portage/package.accept_keywords/any_file`
+
 `FEATURES="parallel-install parallel-fetch" emerge -vtg -j8 -l $(nproc) dev-build/cmake dev-libs/boost dev-cpp/corral dev-cpp/quill dev-cmake/packageproject-cmake dev-cmake/cpm-cmake dev-cmake/addboost-cmake sys-libs/liburing sys-kernel/linux-headers`
+
 `cd to_folder_with_the_repo`
+
 `cmake -S . -B ./build -DCPM_LOCAL_PACKAGES_ONLY=1`
+
 `cmake --build ./build -j $(nproc) --verbose`
+
 now presumably a binary executable at `./build/pedal-1.0`
 
 # License
